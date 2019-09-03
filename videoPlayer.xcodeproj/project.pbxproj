@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		49536E9A231960A600C9C7EA /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49536E99231960A600C9C7EA /* EpisodeCell.swift */; };
+		49536E9C231EA74100C9C7EA /* SeasonEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49536E9B231EA74100C9C7EA /* SeasonEndpoint.swift */; };
 		49AAA5172318252C00F11DC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AAA5162318252C00F11DC3 /* AppDelegate.swift */; };
 		49AAA5192318252C00F11DC3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AAA5182318252C00F11DC3 /* ViewController.swift */; };
 		49AAA51C2318252C00F11DC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49AAA51A2318252C00F11DC3 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		49536E99231960A600C9C7EA /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
+		49536E9B231EA74100C9C7EA /* SeasonEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonEndpoint.swift; sourceTree = "<group>"; };
 		49AAA5132318252C00F11DC3 /* videoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = videoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49AAA5162318252C00F11DC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49AAA5182318252C00F11DC3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				49AAA51D2318252D00F11DC3 /* Assets.xcassets */,
 				49AAA51F2318252D00F11DC3 /* LaunchScreen.storyboard */,
 				49AAA5222318252D00F11DC3 /* Info.plist */,
+				49536E9B231EA74100C9C7EA /* SeasonEndpoint.swift */,
 			);
 			path = videoPlayer;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49AAA5192318252C00F11DC3 /* ViewController.swift in Sources */,
+				49536E9C231EA74100C9C7EA /* SeasonEndpoint.swift in Sources */,
 				49AAA5172318252C00F11DC3 /* AppDelegate.swift in Sources */,
 				49536E9A231960A600C9C7EA /* EpisodeCell.swift in Sources */,
 			);
