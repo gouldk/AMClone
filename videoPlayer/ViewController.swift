@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
@@ -42,13 +43,28 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return json!
     }
     
-
-    
+    private func getEpisodeEndpoint(show:String, season:String, episode:String) -> URL {
+        var component = URLComponents()
+        
+        component.scheme = "https"
+        component.host = "amc-api-br.svc.ds.amcn.com"
+        component.path = "/v2/public/feed/video_episodes"
+        
+        print(show)
+        print(season)
+        print(episode)
+        let show = URLQueryItem(name: "show", value: show)
+        let season = URLQueryItem(name: "season", value: season)
+        let episode = URLQueryItem(name: "episode", value: episode)
+        
+        component.queryItems = [show, season, episode]
+        
+        return component.url!
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.seasonData = self.fetchSeasonEndpoint()
-        // Do any additional setup after loading the view.
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -75,7 +91,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
+        
+        let link = getEpisodeEndpoint(show: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_relation_show_name,
+                                      season: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_relation_season_name,
+                                      episode: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_post_name)
+        
+        self.performSegue(withIdentifier: "ShowEpisodeDetail", sender: indexPath.row)
+        
+        
+    }
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let cell = sender as! EpisodeCell
+        let indexPath = self.collectionView.indexPath(for: cell)!
+        
+        let episodeVC = segue.destination as! EpisodeController
+        let link = getEpisodeEndpoint(show: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_relation_show_name,
+                                      season: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_relation_season_name,
+                                      episode: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_post_name)
+        
+        episodeVC.episodeEndpoint = link
     }
 
 }
