@@ -14,7 +14,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     // parse out individual episodes into this array from endpoint
     var seasonData: SeasonEndpoint? = nil
     
-    private let itemsPerRow: CGFloat = 3
+    private let itemsPerRow: CGFloat = 2
     private let reuseIdentifier = "EpisodeCell"
     private let sectionInsets = UIEdgeInsets(top: 50.0,
                                              left: 20.0,
@@ -84,6 +84,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         
         cell.label.text = seasonData!.data.posts[indexPath.item].labels.layout_content_details.slot_2
+        cell.episodeNumber.text = seasonData!.data.posts[indexPath.item].labels.layout_video.slot_2
+        
         
         return cell
     }

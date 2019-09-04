@@ -21,7 +21,10 @@ class EpisodeController: UIViewController {
     @IBOutlet weak var rating: UILabel!
     @IBOutlet weak var backButton: UIButton!
     
-
+    @IBAction func goBack(_ sender: Any) {
+        dismiss(animated: true, completion:nil)
+    }
+    
     // Parses JSON data from episode page into an EpisodeEndpoint
     private func fetchEpisodeEndpoint() -> EpisodeEndpoint {
         var json: EpisodeEndpoint? = nil
