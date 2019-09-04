@@ -22,7 +22,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                                              right: 20.0)
     
     let seasonEndpoint = URL(string: "https://amc-api-br.svc.ds.amcn.com/v2/public/feed/episodes?show=preacher&season=season-4&device=iOS&restricted=false&publish_state=public")
-    let episodeEndpoint = URL(string: "https://amc-api-br.svc.ds.amcn.com/v2/public/feed/video_episodes?show=preacher&season=season-4&episode=episode-01-masada")
+//    let episodeEndpoint = URL(string: "https://amc-api-br.svc.ds.amcn.com/v2/public/feed/video_episodes?show=preacher&season=season-4&episode=episode-01-masada")
     
     
     
@@ -39,20 +39,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             semaphore.signal()
             }.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-//        print(json!.data.posts[0].meta.amcn_field_post_name)
         return json!
     }
     
-    private func getEpisodeEndpoint(show:String, season:String, episode:String) -> URL {
+    private func getEpisodeEndpointLink(show:String, season:String, episode:String) -> URL {
         var component = URLComponents()
         
         component.scheme = "https"
         component.host = "amc-api-br.svc.ds.amcn.com"
         component.path = "/v2/public/feed/video_episodes"
         
-        print(show)
-        print(season)
-        print(episode)
         let show = URLQueryItem(name: "show", value: show)
         let season = URLQueryItem(name: "season", value: season)
         let episode = URLQueryItem(name: "episode", value: episode)
@@ -67,10 +63,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.seasonData = self.fetchSeasonEndpoint()
     }
     
+    // How many items are in our collection view?
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return seasonData!.data.response.total
     }
     
+    // Create each individual cell with custom images
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! EpisodeCell
         
@@ -90,34 +88,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return cell
     }
     
+    // Triggers the segue from the selected cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let link = getEpisodeEndpoint(show: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_relation_show_name,
-                                      season: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_relation_season_name,
-                                      episode: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_post_name)
-        
-        self.performSegue(withIdentifier: "ShowEpisodeDetail", sender: indexPath.row)
-        
-        
+        self.performSegue(withIdentifier: "ShowEpisodeDetail", sender: self)
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // Grab the selected episode's endpoint and pass along to the new controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let cell = sender as! EpisodeCell
-        let indexPath = self.collectionView.indexPath(for: cell)!
-        
-        let episodeVC = segue.destination as! EpisodeController
-        let link = getEpisodeEndpoint(show: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_relation_show_name,
-                                      season: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_relation_season_name,
-                                      episode: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_post_name)
-        
-        episodeVC.episodeEndpoint = link
+        if let sender = sender as? EpisodeCell {
+            let indexPath = self.collectionView.indexPath(for: sender)!
+            let episodeVC = segue.destination as! EpisodeController
+            let link = getEpisodeEndpointLink(show: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_relation_show_name,
+                                          season: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_relation_season_name,
+                                          episode: self.seasonData!.data.posts[indexPath.item].meta.amcn_field_post_name)
+            
+            episodeVC.episodeEndpoint = link
+        }
     }
 
 }
 
+// Manages the layout of the collection view
 extension ViewController : UICollectionViewDelegateFlowLayout {
     //1
     func collectionView(_ collectionView: UICollectionView,

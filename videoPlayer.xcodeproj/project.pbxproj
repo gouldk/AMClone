@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491AA9A12320159B005CEBBC /* backB.png in Resources */ = {isa = PBXBuildFile; fileRef = 491AA9A02320159B005CEBBC /* backB.png */; };
 		49536E9A231960A600C9C7EA /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49536E99231960A600C9C7EA /* EpisodeCell.swift */; };
 		49536E9C231EA74100C9C7EA /* SeasonEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49536E9B231EA74100C9C7EA /* SeasonEndpoint.swift */; };
 		49536E9E231EED1600C9C7EA /* EpisodeEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49536E9D231EED1600C9C7EA /* EpisodeEndpoint.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		491AA9A02320159B005CEBBC /* backB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backB.png; path = ../../../Downloads/backB.png; sourceTree = "<group>"; };
 		49536E99231960A600C9C7EA /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
 		49536E9B231EA74100C9C7EA /* SeasonEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonEndpoint.swift; sourceTree = "<group>"; };
 		49536E9D231EED1600C9C7EA /* EpisodeEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeEndpoint.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 		49AAA5152318252C00F11DC3 /* videoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				491AA9A02320159B005CEBBC /* backB.png */,
 				49AAA5162318252C00F11DC3 /* AppDelegate.swift */,
 				49AAA5182318252C00F11DC3 /* ViewController.swift */,
 				49536EA1231EF8B700C9C7EA /* EpisodeController.swift */,
@@ -244,6 +247,7 @@
 				49AAA5212318252D00F11DC3 /* LaunchScreen.storyboard in Resources */,
 				49AAA51E2318252D00F11DC3 /* Assets.xcassets in Resources */,
 				49AAA51C2318252C00F11DC3 /* Main.storyboard in Resources */,
+				491AA9A12320159B005CEBBC /* backB.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
