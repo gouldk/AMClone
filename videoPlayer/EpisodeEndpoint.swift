@@ -12,7 +12,7 @@ class EpisodeEndpoint: Decodable {
     
     let success: Bool
     let status: Int
-    let data: EpisodeData
+    let data: EpisodeData?
     let applied_restrictions: [String?]
 }
 
