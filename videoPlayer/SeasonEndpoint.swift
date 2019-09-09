@@ -1,11 +1,3 @@
-//
-//  SeasonEndpoint.swift
-//  videoPlayer
-//
-//  Created by Kyle Gould on 9/3/19.
-//  Copyright © 2019 Kyle Gould. All rights reserved.
-//
-
 import UIKit
 
 class SeasonEndpoint: Decodable {
