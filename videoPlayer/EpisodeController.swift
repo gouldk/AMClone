@@ -8,13 +8,17 @@
 
 import UIKit
 import AVKit
+import AVFoundation
 
 
 class EpisodeController: UIViewController {
     
     var episodeEndpoint: URL? = URL(string: "")
     var episodeData: EpisodeEndpoint? = nil
-    var playerVC: AVPlayerViewController = AVPlayerViewController()
+    var player = AVPlayer()
+    var playerViewController = AVPlayerViewController()
+    var contentURL: URL? = nil
+    
     
     @IBOutlet weak var episodeImage: UIImageView!
     @IBOutlet weak var episodeName: UILabel!
@@ -37,41 +41,22 @@ class EpisodeController: UIViewController {
     private func loadVideoStream() {
 
 //        self.performSegue(withIdentifier: "playVideo", sender: self)
+        self.player = AVPlayer(url: getContentURL())
+        self.playerViewController.player = player
+        self.playerViewController.player?.play()
+        self.playerViewController.showsPlaybackControls = true
+        self.present(playerViewController, animated: true)
+
         
-        let player = AVPlayer(url: URL(string: "https://link.theplatform.com/s/1RZrUC/7arMxSHnUkru?version=2")!)
-        
-        let playerVC = AVPlayerViewController()
-        playerVC.player = player
-        playerVC.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        playerVC.showsPlaybackControls = false
-        
-        let playerView = playerVC.view
-        addChild(playerVC)
-        view.addSubview(playerView!)
-        playerView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        playerView!.frame = view.bounds
-        playerVC.didMove(toParent: self)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap))
-        tapGesture.delegate = self
-        view.addGestureRecognizer(tapGesture)
-        
-        
-//        controller.player = player
-//        self.present(controller, animated: true) {[weak self] in
-//            DispatchQueue.main.async {
-//                player.play()
-//            }
-//        }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let sender = sender as? EpisodeController {
-            let dest = segue.destination as! AVController
-            dest.episodeLink = URL(string: "https://link.theplatform.com/s/1RZrUC/7arMxSHnUkru?version=2")!
-            
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let sender = sender as? EpisodeController {
+//            let dest = segue.destination as! AVController
+//            dest.episodeLink = URL(string: "https://link.theplatform.com/s/1RZrUC/7arMxSHnUkru?version=2")!
+//
+//        }
+//    }
     
     
     // Parses JSON data from episode page into an EpisodeEndpoint
@@ -101,6 +86,7 @@ class EpisodeController: UIViewController {
         self.episodeDesc.text = path.layout_content_details.slot_4
         self.episodeDesc.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.episodeDesc.numberOfLines = 0
+        
         self.setEpisodeImage()
     }
     
@@ -118,32 +104,16 @@ class EpisodeController: UIViewController {
         }
     }
     
+    private func getContentURL() -> URL {
+        let pid = self.episodeData!.data!.posts[0].meta.amcn_field_release_pid
+        let contentURL = "https://link.theplatform.com/s/M_UwQC/" + pid + "?version=2"
+        return URL(string: contentURL)!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        episodeData = self.fetchEpisodeEndpoint()
+        self.episodeData = self.fetchEpisodeEndpoint()
         self.populatePage()
-
-        // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
-
-extension EpisodeController: UIGestureRecognizerDelegate {
-    
-    @IBAction func handleTap(sender: UIGestureRecognizer) {
-        if !playerVC.showsPlaybackControls {
-            playerVC.showsPlaybackControls = false
-        }
-    }
 }
