@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class SeasonController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     // parse out individual episodes into this array from endpoint
     var seasonData: SeasonEndpoint? = nil
@@ -106,7 +106,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 }
 
 // Manages the layout of the collection view
-extension ViewController : UICollectionViewDelegateFlowLayout {
+extension SeasonController : UICollectionViewDelegateFlowLayout {
     //1
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

@@ -10,7 +10,7 @@ class EpisodeController: UIViewController {
     var playerViewController = AVPlayerViewController()
     var contentURL: URL? = nil
     
-    // Linked to individual episode view in controller
+    // Linked to individual episode view in storyboard
     @IBOutlet weak var episodeImage: UIImageView!
     @IBOutlet weak var episodeName: UILabel!
     @IBOutlet weak var showName: UILabel!
