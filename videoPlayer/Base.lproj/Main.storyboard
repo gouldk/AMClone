@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XCQ-aZ-PJ5">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XCQ-aZ-PJ5">
+                                <rect key="frame" x="0.0" y="411" width="414" height="736"/>
                                 <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mSb-LR-gMW">
                                     <size key="itemSize" width="200" height="200"/>
@@ -81,11 +81,41 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="ORu-dw-fA8"/>
                                 </connections>
                             </collectionView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OXg-lo-1OQ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="e7u-Sv-bgh">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYj-Dy-YKl">
+                                            <rect key="frame" x="0.0" y="26" width="414" height="41"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="bYj-Dy-YKl" secondAttribute="height" multiplier="414:41" id="eni-35-16z"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="30"/>
+                                            <color key="textColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="bYj-Dy-YKl" firstAttribute="leading" secondItem="e7u-Sv-bgh" secondAttribute="leading" id="PMu-7m-olB"/>
+                                        <constraint firstAttribute="trailing" secondItem="bYj-Dy-YKl" secondAttribute="trailing" id="azt-5o-rQg"/>
+                                        <constraint firstItem="bYj-Dy-YKl" firstAttribute="top" secondItem="e7u-Sv-bgh" secondAttribute="top" constant="26" id="yNk-1X-UAr"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="OXg-lo-1OQ" secondAttribute="height" multiplier="207:37" id="bCp-bS-Z7f"/>
+                                </constraints>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="XCQ-aZ-PJ5" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Cr4-Em-MnW"/>
                             <constraint firstItem="XCQ-aZ-PJ5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="EFu-h6-OGJ"/>
+                            <constraint firstItem="OXg-lo-1OQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="PUH-nU-foV"/>
+                            <constraint firstItem="OXg-lo-1OQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Y3p-Vn-Sw8"/>
+                            <constraint firstItem="OXg-lo-1OQ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="lbY-Bd-A6b"/>
                             <constraint firstItem="XCQ-aZ-PJ5" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="sHx-XQ-Lpj"/>
                             <constraint firstItem="XCQ-aZ-PJ5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zQj-p7-pyY"/>
                         </constraints>
@@ -93,11 +123,12 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="XCQ-aZ-PJ5" id="TPL-vh-mFF"/>
+                        <outlet property="showName" destination="bYj-Dy-YKl" id="IXH-ss-FWx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="134.48275862068968"/>
+            <point key="canvasLocation" x="136.23188405797103" y="133.69565217391306"/>
         </scene>
         <!--Episode Controller-->
         <scene sceneID="QTo-p2-976">

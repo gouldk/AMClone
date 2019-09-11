@@ -79,14 +79,6 @@ class EpisodeImage: Decodable {
     let wide: WideImage
 }
 
-//class EpisodeWide: Decodable {
-//    let one: ImageInfo
-//    let two: ImageInfo
-//    let three: ImageInfo
-//
-//    private enum CodingKeys : String, CodingKey { case one = "1280x720", two = "800x450", three = "427x240"}
-//}
-
 class EpisodeRequest: Decodable {
     let type: String
     let params: EpisodeParams

@@ -10,7 +10,7 @@ class EpisodeController: UIViewController {
     var playerViewController = AVPlayerViewController()
     var contentURL: URL? = nil
     
-    
+    // Linked to individual episode view in controller
     @IBOutlet weak var episodeImage: UIImageView!
     @IBOutlet weak var episodeName: UILabel!
     @IBOutlet weak var showName: UILabel!
@@ -31,7 +31,7 @@ class EpisodeController: UIViewController {
     
     private func loadVideoStream() {
 
-//        self.performSegue(withIdentifier: "playVideo", sender: self)
+
         self.player = AVPlayer(url: getContentURL())
         self.playerViewController.player = player
         self.playerViewController.player?.play()
@@ -40,14 +40,6 @@ class EpisodeController: UIViewController {
 
         
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let sender = sender as? EpisodeController {
-//            let dest = segue.destination as! AVController
-//            dest.episodeLink = URL(string: "https://link.theplatform.com/s/1RZrUC/7arMxSHnUkru?version=2")!
-//
-//        }
-//    }
     
     
     // Parses JSON data from episode page into an EpisodeEndpoint
@@ -95,6 +87,7 @@ class EpisodeController: UIViewController {
         }
     }
     
+    // Generate a m3u8 stream for the video player to use
     private func getContentURL() -> URL {
         let pid = self.episodeData!.data!.posts[0].meta.amcn_field_release_pid
         let contentURL = "https://link.theplatform.com/s/M_UwQC/" + pid + "?version=2"

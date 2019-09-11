@@ -6,6 +6,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     // parse out individual episodes into this array from endpoint
     var seasonData: SeasonEndpoint? = nil
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var showName: UILabel!
+    
     private let itemsPerRow: CGFloat = 2
     private let reuseIdentifier = "EpisodeCell"
     private let sectionInsets = UIEdgeInsets(top: 50.0,
@@ -13,10 +16,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                                              bottom: 50.0,
                                              right: 20.0)
     
+    // Preacher, Season 4
     let seasonEndpoint = URL(string: "https://amc-api-br.svc.ds.amcn.com/v2/public/feed/episodes?show=preacher&season=season-4&device=iOS&restricted=false&publish_state=public")
-//    let episodeEndpoint = URL(string: "https://amc-api-br.svc.ds.amcn.com/v2/public/feed/video_episodes?show=preacher&season=season-4&episode=episode-01-masada")
-    
-    
     
     // Grabs JSON data from endpoint & decodes
     private func fetchSeasonEndpoint() -> SeasonEndpoint {
@@ -46,13 +47,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let episode = URLQueryItem(name: "episode", value: episode)
         
         component.queryItems = [show, season, episode]
-        
+        print(component.url!)
         return component.url!
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.seasonData = self.fetchSeasonEndpoint()
+        self.showName.text = self.seasonData?.data.request.params.show.uppercased()
     }
     
     // How many items are in our collection view?
@@ -86,8 +88,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "ShowEpisodeDetail", sender: self)
     }
-    
-    @IBOutlet weak var collectionView: UICollectionView!
     
     // Grab the selected episode's endpoint and pass along to the new controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
